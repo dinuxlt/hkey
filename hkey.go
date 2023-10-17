@@ -9,10 +9,10 @@ import (
 )
 
 type CommandLine struct {
-	Message string  `short:"m"  long:"message"  description:"Message to type" required:"true"`
-	Wait    int     `short:"w"  long:"wait"     description:"Time in seconds to wait before typing the message" default:"3"`
-	Time    float64 `short:"t"  long:"time"     description:"Time in ms between letters" default:"500"`
-	Return  bool    `short:"r"  long:"return"   description:"Send ENTER key after message"`
+	Message string `short:"m"  long:"message"  description:"Message to type" required:"true"`
+	Wait    int    `short:"w"  long:"wait"     description:"Time in seconds to wait before typing the message" default:"3"`
+	Time    int    `short:"t"  long:"time"     description:"Time in ms between letters" default:"500"`
+	Return  bool   `short:"r"  long:"return"   description:"Send ENTER key after message"`
 }
 
 var commandLine CommandLine
@@ -37,7 +37,7 @@ func main() {
 	robotgo.TypeStr(commandLine.Message, commandLine.Time)
 
 	if commandLine.Return {
-		robotgo.MilliSleep(int(commandLine.Time))
+		robotgo.MilliSleep(commandLine.Time)
 		robotgo.KeyTap("enter")
 	}
 }
